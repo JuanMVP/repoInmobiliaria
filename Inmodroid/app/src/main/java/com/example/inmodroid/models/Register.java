@@ -1,35 +1,25 @@
 package com.example.inmodroid.models;
 
-public class User {
+public class Register {
 
-    private String id;
-    private String email;
-    private String password;
-    private String name;
-    private String role;
-    private String picture;
-    private String favs;
+private String email;
+private String password;
+private String name;
+private String picture;
+private String role;
 
 
-    public User(){}
+public Register(){}
 
-    public User(String id, String email, String password, String name, String role, String picture, String favs) {
-        this.id = id;
+
+    public Register(String email, String password, String name, String picture, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.role = role;
         this.picture = picture;
-        this.favs = favs;
+        this.role = role;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -55,14 +45,6 @@ public class User {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getPicture() {
         return picture;
     }
@@ -71,24 +53,22 @@ public class User {
         this.picture = picture;
     }
 
-    public String getFavs() {
-        return favs;
+    public String getRole() {
+        return role;
     }
 
-    public void setFavs(String favs) {
-        this.favs = favs;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
+        return "Register{" +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", role='" + role + '\'' +
                 ", picture='" + picture + '\'' +
-                ", favs='" + favs + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
