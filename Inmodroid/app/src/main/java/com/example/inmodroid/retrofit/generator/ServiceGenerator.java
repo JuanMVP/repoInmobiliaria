@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    private static final String BASE_URL = "http://0.0.0.0:9000";
+    private static final String BASE_URL = "http://192.168.56.1:9000";
 
     public static final String MASTER_KEY = "ZPgUSMUlq4N7hIbuyRU1BsUn1U457dz6";
 

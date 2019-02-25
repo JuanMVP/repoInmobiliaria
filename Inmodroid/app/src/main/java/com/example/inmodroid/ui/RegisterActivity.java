@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.inmodroid.R;
 import com.example.inmodroid.models.Register;
@@ -82,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final ProgressDialog proDialog = new ProgressDialog(RegisterActivity.this,R.style.Theme_AppCompat_DayNight_Dialog);
                 proDialog.setIndeterminate(true);
-                proDialog.setMessage("Registrado...");
+                proDialog.setMessage("Registrando...");
                 proDialog.show();
 
 
@@ -122,11 +124,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
+                Log.e("NetworkFail", t.getMessage());
+                Toast.makeText(RegisterActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
-
-
 
 }
