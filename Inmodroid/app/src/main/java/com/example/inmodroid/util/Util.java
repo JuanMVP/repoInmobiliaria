@@ -18,6 +18,8 @@ public class Util {
 
     }
 
+
+
     public static String getToken(Context ctx) {
 
         SharedPreferences prefs = ctx.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);

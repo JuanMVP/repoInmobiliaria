@@ -38,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
-        btnLogin = findViewById(R.id.btnGuardar);
-        btnGoRegister = findViewById(R.id.btnRegistro);
+        btnLogin = findViewById(R.id.buttonLoginIniciarSesion);
+        btnGoRegister = findViewById(R.id.buttonGoRegisterLogin);
 
         doLogin();
 
@@ -92,46 +92,55 @@ public class LoginActivity extends AppCompatActivity {
 
     private void doLogin() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Autenticando...");
-        progressDialog.show();
-
-
-        String emailText = email.getText().toString().trim();
-        String passwordText = password.getText().toString().trim();
-
-        String credentialsLogin = Credentials.basic(emailText,passwordText);
-
-        AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class);
-
-        final Call<AuthAndRegisterResponse> callLogin = loginService.login(credentialsLogin);
-
-        callLogin.enqueue(new Callback<AuthAndRegisterResponse>() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<AuthAndRegisterResponse> call, final Response<AuthAndRegisterResponse> response) {
-                if(response.isSuccessful()){
-                    Runnable progressRunnable = new Runnable() {
-                        @Override
-                        public void run() {
+            public void onClick(View v) {
+
+                final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Autenticando...");
+                progressDialog.show();
+
+
+                String emailText = email.getText().toString().trim();
+                String passwordText = password.getText().toString().trim();
+
+                String credentialsLogin = Credentials.basic(emailText,passwordText);
+
+                AuthAndRegisterService loginService = ServiceGenerator.createService(AuthAndRegisterService.class);
+
+                final Call<AuthAndRegisterResponse> callLogin = loginService.login(credentialsLogin);
+
+                callLogin.enqueue(new Callback<AuthAndRegisterResponse>() {
+                    @Override
+                    public void onResponse(Call<AuthAndRegisterResponse> call, final Response<AuthAndRegisterResponse> response) {
+                        if(response.isSuccessful()){
+                            Runnable progressRunnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.cancel();
+                                    onLoginSuccess(callLogin,response);
+                                }
+                            };
+
+                            Handler pdCanceller = new Handler();
+                            pdCanceller.postDelayed(progressRunnable,2000);
+                        }else{
                             progressDialog.cancel();
-                            onLoginSuccess(callLogin,response);
+                            onLoginFail();
                         }
-                    };
+                    }
 
-                    Handler pdCanceller = new Handler();
-                    pdCanceller.postDelayed(progressRunnable,2000);
-                }else{
-                    progressDialog.cancel();
-                    onLoginFail();
-                }
-            }
+                    @Override
+                    public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
+                    }
+                });
 
             }
         });
+
+
 
 
     }

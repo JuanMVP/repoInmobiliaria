@@ -19,6 +19,7 @@ import com.example.inmodroid.responses.AuthAndRegisterResponse;
 import com.example.inmodroid.retrofit.generator.ServiceGenerator;
 import com.example.inmodroid.retrofit.services.AuthAndRegisterService;
 import com.example.inmodroid.util.Util;
+import com.example.inmodroid.util.UtilToken;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,10 +39,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        nombre = findViewById(R.id.editNombreRegistro);
-        correo = findViewById(R.id.editEmailRegistro);
-        pass = findViewById(R.id.passwordRegsitro);
-        btnRegister = findViewById(R.id.btnRegistro);
+        nombre = findViewById(R.id.nombreRegistro);
+        correo = findViewById(R.id.emailRegistro);
+        pass = findViewById(R.id.passwordRegistro);
+        btnRegister = findViewById(R.id.buttonRegistrarUsuario);
 
         doRegister();
 
@@ -79,14 +80,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void doRegister(){
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        /*btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog proDialog = new ProgressDialog(RegisterActivity.this,R.style.Theme_AppCompat_DayNight_Dialog);
-                proDialog.setIndeterminate(true);
-                proDialog.setMessage("Registrando...");
-                proDialog.show();
-
+                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Registrando...");
+                progressDialog.show();
 
                 String name = nombre.getText().toString().trim();
                 String email = correo.getText().toString().trim();
@@ -100,35 +100,87 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }*/
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Recoger los datos del formulario
+                String email = correo.getText().toString().trim();
+                String password = pass.getText().toString().trim();
+                String name = nombre.getText().toString().trim();
+
+
+
+                Register registro = new Register(name, email, password);
+
+                AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
+
+                Call<AuthAndRegisterResponse> loginReponseCall = service.register(registro);
+                //.doRegister("lNeTI8waAqmpUZa7QSiLv53rqSnlsldv",
+                //        registro);
+
+                loginReponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
+                    @Override
+                    public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
+                        if (response.code() == 201) {
+                            // éxito
+                            /*
+                                Pasos:
+                                    1) Almacenar el token donde corresponda.
+                                    2) Lanzar el siguiente Activity.
+                             */
+                            //ServiceGenerator.jwtToken = response.body().getToken();
+                            UtilToken.setToken(RegisterActivity.this, response.body().getToken());
+                            startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));                            // Toast.makeText(RegistroActivity.this, "Usuario registrado y logeado con éxito", Toast.LENGTH_LONG).show();
+                            // Log.d("token", response.body().getToken());
+
+                        } else {
+                            // error
+                            Toast.makeText(RegisterActivity.this, "Error en el registro. Revise los datos introducidos", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
+                        Log.e("NetworkFailure", t.getMessage());
+                        Toast.makeText(RegisterActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        });
+
 
     }
 
+    /*public void crearUsuarioNuevo(Register registro, final ProgressDialog progressDialog){
+        AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
 
-    public void addNewUser (Register registro, final ProgressDialog progressDialog){
-        AuthAndRegisterService authService = ServiceGenerator.createService(AuthAndRegisterService.class);
-        Call<AuthAndRegisterResponse> registerResponseCall = authService.register(registro);
+        Call<AuthAndRegisterResponse> registerResponseCall = service.register(registro);
 
         registerResponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
+
             @Override
             public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
 
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     progressDialog.dismiss();
-                    onRegisterSuccess(call,response);
-                }else{
+                    onRegisterSuccess(call, response);
+
+                } else {
                     progressDialog.dismiss();
                     onRegisterFail(R.string.error);
                 }
-
             }
 
             @Override
             public void onFailure(Call<AuthAndRegisterResponse> call, Throwable t) {
                 Log.e("NetworkFail", t.getMessage());
                 Toast.makeText(RegisterActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
-
             }
         });
-    }
-
+    }*/
 }
