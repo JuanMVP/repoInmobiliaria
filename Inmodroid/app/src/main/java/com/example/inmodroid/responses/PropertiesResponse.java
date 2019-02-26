@@ -1,5 +1,9 @@
 package com.example.inmodroid.responses;
 
+import com.example.inmodroid.models.Property;
+
+import java.util.List;
+
 public class PropertiesResponse {
 
     private String title;
@@ -13,12 +17,13 @@ public class PropertiesResponse {
     private String city;
     private String province;
     private String loc;
+    private List<Property> listaPropiedades;
 
 
     public PropertiesResponse(){}
 
 
-    public PropertiesResponse(String title, String description, float price, int rooms, float size, String categoryId, String address, String zipcode, String city, String province, String loc) {
+    public PropertiesResponse(String title, String description, float price, int rooms, float size, String categoryId, String address, String zipcode, String city, String province, String loc, List<Property> listaPropiedades) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -30,6 +35,7 @@ public class PropertiesResponse {
         this.city = city;
         this.province = province;
         this.loc = loc;
+        this.listaPropiedades = listaPropiedades;
     }
 
     public String getTitle() {
@@ -120,6 +126,14 @@ public class PropertiesResponse {
         this.loc = loc;
     }
 
+    public List<Property> getListaPropiedades() {
+        return listaPropiedades;
+    }
+
+    public void setListaPropiedades(List<Property> listaPropiedades) {
+        this.listaPropiedades = listaPropiedades;
+    }
+
     @Override
     public String toString() {
         return "PropertiesResponse{" +
@@ -134,6 +148,7 @@ public class PropertiesResponse {
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +
                 ", loc='" + loc + '\'' +
+                ", listaPropiedades=" + listaPropiedades +
                 '}';
     }
 }

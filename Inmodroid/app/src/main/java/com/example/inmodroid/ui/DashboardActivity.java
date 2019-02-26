@@ -15,9 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.inmodroid.R;
+import com.example.inmodroid.listeners.OnListInmueblesInteractionListener;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListInmueblesInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
