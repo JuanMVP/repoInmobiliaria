@@ -1,46 +1,50 @@
 package com.example.inmodroid.models;
 
+import java.util.List;
+
 public class Property {
 
-    private String ownerId;
+    //private String ownerId;
     private String title;
     private String description;
     private String price;
     private String rooms;
     private String size;
-    private String categoryId;
+    //private String categoryId;
     private String address;
     private String zipcode;
     private String city;
     private String province;
     private String loc;
+    private List<String> photos;
 
 
     public Property (){}
 
 
-    public Property(String ownerId, String title, String description, String price, String rooms, String size, String categoryId, String address, String zipcode, String city, String province, String loc) {
-        this.ownerId = ownerId;
+    public Property(/*String ownerId,*/ String title, String description, String price, String rooms, String size, /*String categoryId,*/ String address, String zipcode, String city, String province, String loc, List<String> photos) {
+        //this.ownerId = ownerId;
         this.title = title;
         this.description = description;
         this.price = price;
         this.rooms = rooms;
         this.size = size;
-        this.categoryId = categoryId;
+        //this.categoryId = categoryId;
         this.address = address;
         this.zipcode = zipcode;
         this.city = city;
         this.province = province;
         this.loc = loc;
+        this.photos = photos;
     }
 
-    public String getOwnerId() {
+    /*public String getOwnerId() {
         return ownerId;
     }
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -82,13 +86,13 @@ public class Property {
         this.size = size;
     }
 
-    public String getCategoryId() {
+    /*public String getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
-    }
+    }*/
 
     public String getAddress() {
         return address;
@@ -130,17 +134,24 @@ public class Property {
         this.loc = loc;
     }
 
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
+    }
 
     @Override
     public String toString() {
         return "Property{" +
-                "ownerId='" + ownerId + '\'' +
+                //"ownerId='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", price='" + price + '\'' +
                 ", rooms='" + rooms + '\'' +
                 ", size='" + size + '\'' +
-                ", categoryId='" + categoryId + '\'' +
+                //", categoryId='" + categoryId + '\'' +
                 ", address='" + address + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", city='" + city + '\'' +

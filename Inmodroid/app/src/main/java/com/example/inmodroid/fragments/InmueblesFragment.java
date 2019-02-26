@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.example.inmodroid.responses.PropertiesResponse;
 import com.example.inmodroid.retrofit.generator.ServiceGenerator;
 import com.example.inmodroid.retrofit.services.PropertiesService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -83,15 +85,47 @@ public class InmueblesFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             
-            cargarDatos(recyclerView);
+            //
+            // cargarDatos(recyclerView);
+
+            listaPropiedades = new ArrayList<>();
+
+            final PropertiesService service = ServiceGenerator.createService(PropertiesService.class);
+            Call<ResponseContainer<Property>> call = service.getProperties();
+
+            call.enqueue(new Callback<ResponseContainer<Property>>() {
+                @Override
+                public void onResponse(Call<ResponseContainer<Property>> call, Response<ResponseContainer<Property>> response) {
+                    if (response.code() != 200) {
+                        Toast.makeText(getActivity(), "Error en petición", Toast.LENGTH_SHORT).show();
+                    } else {
+                        listaPropiedades = response.body().getRows();
+
+                        adapter = new MyInmueblesRecyclerViewAdapter(
+                                ctx,
+                                R.layout.fragment_inmuebles,
+                                listaPropiedades,
+                                mListener
+                        );
+                        recyclerView.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseContainer<Property>> call, Throwable t) {
+                    Log.e("NetworkFailure", t.getMessage());
+                    Toast.makeText(getActivity(), "Error de conexión", Toast.LENGTH_SHORT).show();
+                }
+            });
             
             
         }
         return view;
     }
 
-    private void cargarDatos(final RecyclerView recyclerView) {
+    /*private void cargarDatos(final RecyclerView recyclerView) {
 
+        listaPropiedades = new ArrayList<>();
         PropertiesService propertiesService = ServiceGenerator.createService(PropertiesService.class);
         Call<ResponseContainer<Property>> call = propertiesService.getProperties();
 
@@ -120,7 +154,7 @@ public class InmueblesFragment extends Fragment {
         });
 
 
-    }
+    }*/
 
 
     @Override
@@ -141,16 +175,7 @@ public class InmueblesFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);

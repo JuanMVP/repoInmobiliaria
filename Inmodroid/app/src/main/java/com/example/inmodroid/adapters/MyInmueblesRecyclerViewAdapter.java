@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.inmodroid.R;
 
 import com.example.inmodroid.listeners.OnListInmueblesInteractionListener;
@@ -41,6 +43,12 @@ public class MyInmueblesRecyclerViewAdapter extends RecyclerView.Adapter<MyInmue
         holder.mItem = mValues.get(position);
         holder.tituloPropiedad.setText(holder.mItem.getTitle());
         holder.precioPropiedad.setText(holder.mItem.getPrice());
+        if (holder.mItem.getPhotos() != null) {
+            Glide.with(ctx).load(holder.mItem.getPhotos().get(0)).into(holder.imagenInmueble);
+        } else {
+            holder.imagenInmueble.setImageResource(R.drawable.ic_no_photo);
+        }
+
 
 
     }
@@ -54,6 +62,7 @@ public class MyInmueblesRecyclerViewAdapter extends RecyclerView.Adapter<MyInmue
         public final View mView;
         public final TextView tituloPropiedad;
         public final TextView precioPropiedad;
+        public final ImageView imagenInmueble;
         public Property mItem;
 
 
@@ -62,6 +71,7 @@ public class MyInmueblesRecyclerViewAdapter extends RecyclerView.Adapter<MyInmue
             mView = view;
             tituloPropiedad =  view.findViewById(R.id.tituloPropiedad);
             precioPropiedad =  view.findViewById(R.id.precioPropiedad);
+            imagenInmueble = view.findViewById(R.id.imagenPropiedadLista);
         }
 
 
