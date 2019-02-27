@@ -8,19 +8,19 @@ public class User {
     private String name;
     private String role;
     private String picture;
-    private String favs;
+    //private Property favs;
 
 
     public User(){}
 
-    public User(String id, String email, String password, String name, String role, String picture, String favs) {
+    public User(String id, String email, String password, String name, String role, String picture /*Property favs*/) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
         this.picture = picture;
-        this.favs = favs;
+        //this.favs = favs;
     }
 
     public String getId() {
@@ -71,13 +71,8 @@ public class User {
         this.picture = picture;
     }
 
-    public String getFavs() {
-        return favs;
-    }
 
-    public void setFavs(String favs) {
-        this.favs = favs;
-    }
+
 
     @Override
     public String toString() {
@@ -88,7 +83,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
                 ", picture='" + picture + '\'' +
-                ", favs='" + favs + '\'' +
+
                 '}';
     }
 }

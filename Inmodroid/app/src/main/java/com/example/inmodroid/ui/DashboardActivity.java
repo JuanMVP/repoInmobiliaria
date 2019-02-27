@@ -16,10 +16,11 @@ import android.view.MenuItem;
 
 import com.example.inmodroid.R;
 import com.example.inmodroid.listeners.OnListInmueblesInteractionListener;
+import com.example.inmodroid.util.Util;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListInmueblesInteractionListener {
-
+        MenuItem oculto1,oculto2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,16 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Objetos que quiero ocultar
+        oculto1 = navigationView.getMenu().findItem(R.id.nav_gallery);
+        oculto2 = navigationView.getMenu().findItem(R.id.nav_slideshow);
+
+        //if para ocultar
+        if(Util.getToken(this) == null){
+            oculto1.setVisible(false);
+            oculto2.setVisible(false);
+        }
     }
 
     @Override
@@ -91,9 +102,7 @@ public class DashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
