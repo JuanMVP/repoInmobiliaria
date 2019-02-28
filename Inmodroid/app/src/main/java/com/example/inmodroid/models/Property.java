@@ -1,9 +1,11 @@
 package com.example.inmodroid.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Property {
+public class Property implements Serializable {
 
+    private String id;
     //private String ownerId;
     private String title;
     private String description;
@@ -22,8 +24,9 @@ public class Property {
     public Property (){}
 
 
-    public Property(/*String ownerId,*/ String title, String description, String price, String rooms, String size, /*String categoryId,*/ String address, String zipcode, String city, String province, String loc, List<String> photos) {
+    public Property(/*String ownerId,*/String id, String title, String description, String price, String rooms, String size, /*String categoryId,*/ String address, String zipcode, String city, String province, String loc, List<String> photos) {
         //this.ownerId = ownerId;
+        this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -45,6 +48,14 @@ public class Property {
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }*/
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -145,6 +156,7 @@ public class Property {
     @Override
     public String toString() {
         return "Property{" +
+                "id='" + id + '\'' +
                 //"ownerId='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +

@@ -84,7 +84,7 @@ public class InmueblesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            
+
             //
             // cargarDatos(recyclerView);
 
@@ -117,8 +117,8 @@ public class InmueblesFragment extends Fragment {
                     Toast.makeText(getActivity(), "Error de conexión", Toast.LENGTH_SHORT).show();
                 }
             });
-            
-            
+
+
         }
         return view;
     }
