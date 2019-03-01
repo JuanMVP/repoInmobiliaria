@@ -5,24 +5,18 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.inmodroid.R;
 import com.example.inmodroid.adapters.PhotoAdapter;
-import com.example.inmodroid.models.OneResponseContainer;
+import com.example.inmodroid.responses.OneResponseContainer;
 import com.example.inmodroid.models.Property;
-import com.example.inmodroid.models.ResponseContainer;
 import com.example.inmodroid.retrofit.generator.ServiceGenerator;
 import com.example.inmodroid.retrofit.services.PropertiesService;
 import com.example.inmodroid.util.Util;
-import com.smarteist.autoimageslider.SliderLayout;
-import com.smarteist.autoimageslider.SliderView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,7 +32,7 @@ public class DetailsActivity extends AppCompatActivity {
     private Context ctx;
     Property propiedad;
     private ViewPager visorDeFotos;
-    SliderLayout imagenSlider;
+
     String token;
     
     

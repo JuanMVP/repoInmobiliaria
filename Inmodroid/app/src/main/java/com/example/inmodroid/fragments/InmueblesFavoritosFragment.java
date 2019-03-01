@@ -3,7 +3,6 @@ package com.example.inmodroid.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.inmodroid.adapters.MyInmueblesRecyclerViewAdapter;
 import com.example.inmodroid.R;
-import com.example.inmodroid.dummy.DummyContent.DummyItem;
+import com.example.inmodroid.adapters.MyInmueblesRecyclerViewAdapter;
+import com.example.inmodroid.fragments.dummy.DummyContent;
+import com.example.inmodroid.fragments.dummy.DummyContent.DummyItem;
 import com.example.inmodroid.listeners.OnListInmueblesInteractionListener;
 import com.example.inmodroid.models.Property;
+import com.example.inmodroid.models.TipoAutenticacion;
 import com.example.inmodroid.responses.ResponseContainer;
 import com.example.inmodroid.retrofit.generator.ServiceGenerator;
 import com.example.inmodroid.retrofit.services.PropertiesService;
+import com.example.inmodroid.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,26 +32,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class InmueblesFragment extends Fragment {
+public class InmueblesFavoritosFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListInmueblesInteractionListener mListener;
+    private List<Property> listaFavoritos;
     private Context ctx;
-    private RecyclerView recyclerView;
     private MyInmueblesRecyclerViewAdapter adapter;
-    private List<Property> listaPropiedades;
 
 
-    public InmueblesFragment() {
+    public InmueblesFavoritosFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static InmueblesFragment newInstance(int columnCount) {
-        InmueblesFragment fragment = new InmueblesFragment();
+    public static InmueblesFavoritosFragment newInstance(int columnCount) {
+        InmueblesFavoritosFragment fragment = new InmueblesFavoritosFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -68,44 +69,33 @@ public class InmueblesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inmuebles_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_inmueblesfavoritos_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-
-            recyclerView = view.findViewById(R.id.inmueblesList);
-            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-
+            final RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            //
-            // cargarDatos(recyclerView);
 
-            listaPropiedades = new ArrayList<>();
+            listaFavoritos = new ArrayList<>();
 
-            final PropertiesService service = ServiceGenerator.createService(PropertiesService.class);
-            Call<ResponseContainer<Property>> call = service.getProperties();
+            PropertiesService service = ServiceGenerator.createService(PropertiesService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
+            Call<ResponseContainer<Property>> callFavProperty = service.getFavouritesProperties();
 
-            call.enqueue(new Callback<ResponseContainer<Property>>() {
+            callFavProperty.enqueue(new Callback<ResponseContainer<Property>>() {
                 @Override
                 public void onResponse(Call<ResponseContainer<Property>> call, Response<ResponseContainer<Property>> response) {
-                    if (response.code() != 200) {
-                        Toast.makeText(getActivity(), "Error en petición", Toast.LENGTH_SHORT).show();
-                    } else {
-                        listaPropiedades = response.body().getRows();
-
-                        adapter = new MyInmueblesRecyclerViewAdapter(
-                                ctx,
-                                R.layout.fragment_inmuebles,
-                                listaPropiedades,
-                                mListener
-                        );
+                    if(response.isSuccessful()){
+                        listaFavoritos = response.body().getRows();
+                        adapter = new MyInmueblesRecyclerViewAdapter(ctx,listaFavoritos,mListener,true);
                         recyclerView.setAdapter(adapter);
+                    }else{
+                        Toast.makeText(ctx, "Error en la peticion", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -113,6 +103,7 @@ public class InmueblesFragment extends Fragment {
                 public void onFailure(Call<ResponseContainer<Property>> call, Throwable t) {
                     Log.e("NetworkFailure", t.getMessage());
                     Toast.makeText(getActivity(), "Error de conexión", Toast.LENGTH_SHORT).show();
+
                 }
             });
 
@@ -120,39 +111,6 @@ public class InmueblesFragment extends Fragment {
         }
         return view;
     }
-
-    /*private void cargarDatos(final RecyclerView recyclerView) {
-
-        listaPropiedades = new ArrayList<>();
-        PropertiesService propertiesService = ServiceGenerator.createService(PropertiesService.class);
-        Call<ResponseContainer<Property>> call = propertiesService.getProperties();
-
-        call.enqueue(new Callback<ResponseContainer<Property>>() {
-            @Override
-            public void onResponse(Call<ResponseContainer<Property>> call, Response<ResponseContainer<Property>> response) {
-                if(response.isSuccessful()){
-                    listaPropiedades = response.body().getRows();
-
-                    adapter = new MyInmueblesRecyclerViewAdapter(
-                            ctx,
-                            R.layout.fragment_inmuebles,
-                            listaPropiedades,
-                            mListener
-                    );
-                    recyclerView.setAdapter(adapter);
-                } else{
-                    Toast.makeText(getContext(), "Error Al obtener Inmuebles", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseContainer<Property>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }*/
 
 
     @Override
@@ -174,8 +132,4 @@ public class InmueblesFragment extends Fragment {
     }
 
 
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
-    }
 }

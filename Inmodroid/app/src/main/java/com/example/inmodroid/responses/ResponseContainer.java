@@ -1,4 +1,4 @@
-package com.example.inmodroid.models;
+package com.example.inmodroid.responses;
 
 import java.util.List;
 

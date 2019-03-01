@@ -13,14 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.inmodroid.R;
+import com.example.inmodroid.fragments.InmueblesFavoritosFragment;
+import com.example.inmodroid.fragments.InmueblesFragment;
 import com.example.inmodroid.listeners.OnListInmueblesInteractionListener;
 import com.example.inmodroid.util.Util;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListInmueblesInteractionListener {
         MenuItem oculto1,oculto2;
+        FrameLayout contenedor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +51,11 @@ public class DashboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
+        //contenedor para fragments
+        contenedor = findViewById(R.id.contenedor);
+
         //Objetos que quiero ocultar
-        oculto1 = navigationView.getMenu().findItem(R.id.nav_gallery);
+        oculto1 = navigationView.getMenu().findItem(R.id.goFavourites);
         oculto2 = navigationView.getMenu().findItem(R.id.nav_slideshow);
 
         //if para ocultar
@@ -56,6 +63,9 @@ public class DashboardActivity extends AppCompatActivity
             oculto1.setVisible(false);
             oculto2.setVisible(false);
         }
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.contenedor, new InmueblesFragment()).commit();
     }
 
     @Override
@@ -99,13 +109,13 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.goLogin) {
             startActivity(new Intent(DashboardActivity.this,LoginActivity.class));
             
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.goFavourites) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, new InmueblesFavoritosFragment()).commit();
+
 
         } else if (id == R.id.nav_slideshow) {
-
-        }  else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
