@@ -12,7 +12,7 @@ public class Property implements Serializable {
     private String price;
     private String rooms;
     private String size;
-    //private String categoryId;
+    private Category categoryId;
     private String address;
     private String zipcode;
     private String city;
@@ -24,7 +24,7 @@ public class Property implements Serializable {
     public Property (){}
 
 
-    public Property(/*String ownerId,*/String id, String title, String description, String price, String rooms, String size, /*String categoryId,*/ String address, String zipcode, String city, String province, String loc, List<String> photos) {
+    public Property(/*String ownerId,*/String id, String title, String description, String price, String rooms, String size, Category categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
         //this.ownerId = ownerId;
         this.id = id;
         this.title = title;
@@ -97,13 +97,13 @@ public class Property implements Serializable {
         this.size = size;
     }
 
-    /*public String getCategoryId() {
+    public Category getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
-    }*/
+    }
 
     public String getAddress() {
         return address;
@@ -163,7 +163,7 @@ public class Property implements Serializable {
                 ", price='" + price + '\'' +
                 ", rooms='" + rooms + '\'' +
                 ", size='" + size + '\'' +
-                //", categoryId='" + categoryId + '\'' +
+                ", categoryId='" + categoryId + '\'' +
                 ", address='" + address + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", city='" + city + '\'' +

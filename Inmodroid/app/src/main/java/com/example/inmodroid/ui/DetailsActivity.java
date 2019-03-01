@@ -2,6 +2,7 @@ package com.example.inmodroid.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.inmodroid.R;
+import com.example.inmodroid.adapters.PhotoAdapter;
 import com.example.inmodroid.models.OneResponseContainer;
 import com.example.inmodroid.models.Property;
 import com.example.inmodroid.models.ResponseContainer;
@@ -30,10 +32,12 @@ import retrofit2.Response;
 public class DetailsActivity extends AppCompatActivity {
 
     private List<List<String>> photos;
+    private PhotoAdapter adapterImagen;
     private TextView titulo, descripcion, precio, metrosCuadrados, habitaciones, codigoPostal, direccion, categoria, ciudad;
     private ImageView imagenDetalle;
     private Context ctx;
     Property propiedad;
+    private ViewPager visorDeFotos;
     SliderLayout imagenSlider;
     String token;
     
@@ -78,10 +82,19 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void setearDetalles() {
 
+
+
+        adapterImagen = new PhotoAdapter(DetailsActivity.this,propiedad.getPhotos());
+        visorDeFotos.setAdapter(adapterImagen);
+        titulo.setText(propiedad.getTitle());
+        categoria.setText(propiedad.getCategoryId().getName());
         descripcion.setText(propiedad.getDescription());
         ciudad.setText(propiedad.getCity() + " - " + propiedad.getProvince());
         direccion.setText(propiedad.getAddress());
         precio.setText(propiedad.getPrice() + " €/mes");
+        metrosCuadrados.setText(propiedad.getSize() + "m/2");
+        habitaciones.setText(propiedad.getRooms());
+        codigoPostal.setText(propiedad.getZipcode());
         /*if (propiedad.getPhotos() != null) {
             Glide.with(ctx).load(propiedad.getPhotos().get(0)).into(imagenDetalle);
         } else {
@@ -106,7 +119,8 @@ public class DetailsActivity extends AppCompatActivity {
         direccion = findViewById(R.id.direccionDetalle);
         categoria = findViewById(R.id.categoriaDetalle);
         ciudad = findViewById(R.id.ciudadDetalle);
-        imagenDetalle = findViewById(R.id.imagenPropiedadDetalle);
+        //imagenDetalle = findViewById(R.id.imagenPropiedadDetalle);
+        visorDeFotos = findViewById(R.id.imagenPropiedadDetalle);
 
         /*imagenSlider = findViewById(R.id.imageSlider);
         imagenSlider.setScrollTimeInSec(1);*/
