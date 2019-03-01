@@ -8,10 +8,7 @@
     <string name="action_settings">Settings</string>
 
 
-    <string name="register_contraseña_incorrecta">Las contraseñas no cuenciden</string>
-    <string name="register_contraseña_no_segura">La contraseña tiene que tener un mínimo de 6 caracteres</string>
-    <string name="register_mismo_correo">Ese correo ya esta en uso</string>
-    <string name="register_error_registrar">Error al registrar</string>
+
 
     <string name="error">Error</string>
     <string name="edit">Editar</string>

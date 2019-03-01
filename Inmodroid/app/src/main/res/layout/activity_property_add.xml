@@ -151,7 +151,7 @@
             <TextView
                 android:id="@+id/textRegiosAddPropiedad"
                 android:fontFamily="casual"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+
                 android:textSize="18sp" />
         </TableRow>
 
@@ -168,7 +168,7 @@
             <TextView
                 android:id="@+id/textProvinciaAddPropiedad"
                 android:fontFamily="casual"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+
                 android:textSize="18sp" />
         </TableRow>
 
@@ -185,7 +185,7 @@
             <TextView
                 android:id="@+id/textMunicipioAddPropiedad"
                 android:fontFamily="casual"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+               
                 android:textSize="18sp" />
         </TableRow>
 
