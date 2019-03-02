@@ -1,5 +1,6 @@
 package com.example.inmodroid.retrofit.services;
 
+import com.example.inmodroid.responses.AddPropertyResponse;
 import com.example.inmodroid.responses.FavouriteResponse;
 import com.example.inmodroid.responses.OneResponseContainer;
 import com.example.inmodroid.models.Photo;
@@ -7,6 +8,7 @@ import com.example.inmodroid.models.Property;
 import com.example.inmodroid.responses.ResponseContainer;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -32,5 +34,9 @@ public interface PropertiesService {
 
     @DELETE("/properties/fav/{id}")
     Call<FavouriteResponse> deletePropertiesFav(@Path("id") String id);
+
+    @POST("/properties")
+    Call<AddPropertyResponse> addProperty (@Body AddPropertyResponse property);
+
 
 }
