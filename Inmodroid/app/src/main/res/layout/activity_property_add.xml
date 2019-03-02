@@ -183,7 +183,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textMunicipioAddPropiedad"
+                android:id="@+id/textCiudadAddPropiedad"
                 android:fontFamily="casual"
                
                 android:textSize="18sp" />

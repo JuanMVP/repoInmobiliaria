@@ -1,68 +1,35 @@
-package com.example.inmodroid.responses;
+package com.example.inmodroid.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class AddPropertyResponse {
-
-    private String id;
-    private String ownerId;
+public class AddPropertyDto {
     private String title;
     private String description;
-    private Long price;
-    private Long rooms;
-    private Long size;
+    private double price;
+    private int rooms;
     private String categoryId;
     private String address;
     private String zipcode;
     private String city;
     private String province;
     private String loc;
-    private List<String> photos;
 
-    public AddPropertyResponse(){}
 
-    public AddPropertyResponse(String id, String ownerId, String title, String description, Long price, Long rooms, Long size, String categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
-        this.id = id;
-        this.ownerId = ownerId;
+    public AddPropertyDto(String title, String description, double price, int rooms, String categoryId, String address, String zipcode, String city, String province, String loc) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.rooms = rooms;
-        this.size = size;
         this.categoryId = categoryId;
         this.address = address;
         this.zipcode = zipcode;
         this.city = city;
         this.province = province;
         this.loc = loc;
-        this.photos = photos;
     }
 
-    public AddPropertyResponse(AddPropertyResponse datosParaCrearUnaPropiedad) {
-
-    }
-
-    public AddPropertyResponse(String toString, String toString1, String toString2, String toString3, String id, String toString4, String toString5, String toString6, String toString7) {
+    public AddPropertyDto(String s, String toString, String string, String s1, String id, String toString1, String string1, String s2, String toString2) {
 
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
-    }
 
     public String getTitle() {
         return title;
@@ -80,28 +47,20 @@ public class AddPropertyResponse {
         this.description = description;
     }
 
-    public Long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Long getRooms() {
+    public int getRooms() {
         return rooms;
     }
 
-    public void setRooms(Long rooms) {
+    public void setRooms(int rooms) {
         this.rooms = rooms;
-    }
-
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
     }
 
     public String getCategoryId() {
@@ -152,31 +111,20 @@ public class AddPropertyResponse {
         this.loc = loc;
     }
 
-    public List<String> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<String> photos) {
-        this.photos = photos;
-    }
 
     @Override
     public String toString() {
-        return "AddPropertyResponse{" +
-                "id='" + id + '\'' +
-                ", ownerId='" + ownerId + '\'' +
-                ", title='" + title + '\'' +
+        return "AddPropertyDto{" +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", rooms=" + rooms +
-                ", size=" + size +
                 ", categoryId='" + categoryId + '\'' +
                 ", address='" + address + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +
                 ", loc='" + loc + '\'' +
-                ", photos=" + photos +
                 '}';
     }
 }

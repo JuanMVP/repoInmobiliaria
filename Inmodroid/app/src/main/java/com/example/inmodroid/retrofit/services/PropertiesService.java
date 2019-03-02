@@ -1,5 +1,6 @@
 package com.example.inmodroid.retrofit.services;
 
+import com.example.inmodroid.models.AddPropertyDto;
 import com.example.inmodroid.responses.AddPropertyResponse;
 import com.example.inmodroid.responses.FavouriteResponse;
 import com.example.inmodroid.responses.OneResponseContainer;
@@ -26,6 +27,9 @@ public interface PropertiesService {
     @GET("/properties/{id}")
     Call<OneResponseContainer<Property>> getOnePropertyById(@Path("id") String id);
 
+    @GET("/properties/mine")
+    Call<ResponseContainer<Property>> getUserProperties();
+
     @GET("/properties/fav")
     Call<ResponseContainer<Property>> getFavouritesProperties();
 
@@ -36,7 +40,7 @@ public interface PropertiesService {
     Call<FavouriteResponse> deletePropertiesFav(@Path("id") String id);
 
     @POST("/properties")
-    Call<AddPropertyResponse> addProperty (@Body AddPropertyResponse property);
+    Call<AddPropertyResponse> addProperty (@Body AddPropertyDto property);
 
 
 }

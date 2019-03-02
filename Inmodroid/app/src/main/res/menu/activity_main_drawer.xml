@@ -12,10 +12,15 @@
             android:id="@+id/goFavourites"
             android:icon="@drawable/ic_rating"
             android:title="Mis Propiedades Favoritas" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/goUserProperties"
+            android:icon="@drawable/ic_real_state"
+            android:title="Mis Propiedades Subidas" />
+        <item
+            android:id="@+id/goLogout"
+            android:icon="@drawable/ic_logout"
+            android:title="Cerrar Sesión" />
 
     </group>
 

@@ -18,12 +18,15 @@ import android.widget.FrameLayout;
 import com.example.inmodroid.R;
 import com.example.inmodroid.fragments.InmueblesFavoritosFragment;
 import com.example.inmodroid.fragments.InmueblesFragment;
+import com.example.inmodroid.fragments.MisPropiedadesFragment;
+import com.example.inmodroid.fragments.dummy.DummyContent;
 import com.example.inmodroid.listeners.OnListInmueblesInteractionListener;
 import com.example.inmodroid.util.Util;
+import com.example.inmodroid.util.UtilToken;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListInmueblesInteractionListener {
-        MenuItem oculto1,oculto2;
+        implements NavigationView.OnNavigationItemSelectedListener, OnListInmueblesInteractionListener, MisPropiedadesFragment.OnListFragmentInteractionListener {
+        MenuItem oculto1,oculto2,oculto3;
         FrameLayout contenedor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,11 @@ public class DashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAddHome);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(DashboardActivity.this,PropertyAddActivity.class));
             }
         });
 
@@ -56,12 +58,15 @@ public class DashboardActivity extends AppCompatActivity
 
         //Objetos que quiero ocultar
         oculto1 = navigationView.getMenu().findItem(R.id.goFavourites);
-        oculto2 = navigationView.getMenu().findItem(R.id.nav_slideshow);
+        oculto2 = navigationView.getMenu().findItem(R.id.goLogout);
+        oculto3 = navigationView.getMenu().findItem(R.id.goUserProperties);
 
         //if para ocultar
         if(Util.getToken(this) == null){
             oculto1.setVisible(false);
             oculto2.setVisible(false);
+            oculto3.setVisible(false);
+            fab.hide();
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -115,12 +120,24 @@ public class DashboardActivity extends AppCompatActivity
                     .replace(R.id.contenedor, new InmueblesFavoritosFragment()).commit();
 
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.goLogout) {
+            Util.clearSharedPreferences(this);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, new InmueblesFragment()).commit();
 
+        }else if (id == R.id.goUserProperties){
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, new MisPropiedadesFragment()).commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        
     }
 }

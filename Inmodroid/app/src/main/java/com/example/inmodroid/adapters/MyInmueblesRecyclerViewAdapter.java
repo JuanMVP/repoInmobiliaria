@@ -93,35 +93,7 @@ public class MyInmueblesRecyclerViewAdapter extends RecyclerView.Adapter<MyInmue
                 }
             });
 
-            holder.imagenNoFav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    PropertiesService service = ServiceGenerator.createService(PropertiesService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
-                    Call<FavouriteResponse> callFavourites = service.addPropertiesFav(holder.favProperty.getId());
-
-                    callFavourites.enqueue(new Callback<FavouriteResponse>() {
-                        @Override
-                        public void onResponse(Call<FavouriteResponse> call, Response<FavouriteResponse> response) {
-                            if(response.isSuccessful()){
-                                holder.imagenNoFav.setImageResource(R.drawable.ic_favorite);
-
-                            }else{
-                                Toast.makeText(ctx, "Error en Favoritos", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<FavouriteResponse> call, Throwable t) {
-                            Log.e("NetworkFailure", t.getMessage());
-                            Toast.makeText(ctx, "Error de conexión", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-
-                }
-            });
 
 
         //noAuth
@@ -165,10 +137,52 @@ public class MyInmueblesRecyclerViewAdapter extends RecyclerView.Adapter<MyInmue
                     public void onClick(View v) {
                         isFav = mValues.get(position).isFav();
                         if(isFav || fragmentFav){
-                            isFavClick(holder);
+                            PropertiesService service = ServiceGenerator.createService(PropertiesService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
+                            Call<FavouriteResponse> callFavourites = service.deletePropertiesFav(holder.mItem.getId());
+
+                            callFavourites.enqueue(new Callback<FavouriteResponse>() {
+                                @Override
+                                public void onResponse(Call<FavouriteResponse> call, Response<FavouriteResponse> response) {
+                                    if(response.isSuccessful()){
+                                        holder.imagenNoFav.setImageResource(R.drawable.ic_favorite_border);
+                                        isFav = !isFav;
+                                        Toast.makeText(ctx, "Favorito eliminado con éxito", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(ctx, "Error en la petición", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<FavouriteResponse> call, Throwable t) {
+
+                                    Log.e("NetworkFailure", t.getMessage());
+                                    Toast.makeText(ctx, "Error de conexión", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
                             mValues.get(position).setFav(false);
                         }else{
-                            isNoFavClick(holder);
+                            PropertiesService service = ServiceGenerator.createService(PropertiesService.class,Util.getToken(ctx),TipoAutenticacion.JWT);
+                            Call<FavouriteResponse> callNoFav = service.addPropertiesFav(holder.mItem.getId());
+                            callNoFav.enqueue(new Callback<FavouriteResponse>() {
+                                @Override
+                                public void onResponse(Call<FavouriteResponse> call, Response<FavouriteResponse> response) {
+                                    if(response.isSuccessful()){
+                                        holder.imagenNoFav.setImageResource(R.drawable.ic_favorite);
+                                        isFav = !isFav;
+                                        Toast.makeText(ctx, "Añadido a favoritos correctamente", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(ctx, "Error de petición", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<FavouriteResponse> call, Throwable t) {
+                                    Log.e("NetworkFailure", t.getMessage());
+                                    Toast.makeText(ctx, "Error de conexión", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
                             mValues.get(position).setFav(true);
                         }
                     }
@@ -205,63 +219,6 @@ public class MyInmueblesRecyclerViewAdapter extends RecyclerView.Adapter<MyInmue
 
     }
 
-    private void isFavClick(final ViewHolder holder) {
-
-        PropertiesService service = ServiceGenerator.createService(PropertiesService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
-        Call<FavouriteResponse> callFavourites = service.deletePropertiesFav(holder.mItem.getId());
-
-        callFavourites.enqueue(new Callback<FavouriteResponse>() {
-            @Override
-            public void onResponse(Call<FavouriteResponse> call, Response<FavouriteResponse> response) {
-                if(response.isSuccessful()){
-                    holder.imagenNoFav.setImageResource(R.drawable.ic_favorite_border);
-                    isFav = !isFav;
-                    Toast.makeText(ctx, "Favorito eliminado con éxito", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(ctx, "Error en la petición", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FavouriteResponse> call, Throwable t) {
-
-                Log.e("NetworkFailure", t.getMessage());
-                Toast.makeText(ctx, "Error de conexión", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-    }
-
-
-
-    private void isNoFavClick(final ViewHolder holder){
-
-        PropertiesService service = ServiceGenerator.createService(PropertiesService.class,Util.getToken(ctx),TipoAutenticacion.JWT);
-        Call<FavouriteResponse> callNoFav = service.addPropertiesFav(holder.mItem.getId());
-        callNoFav.enqueue(new Callback<FavouriteResponse>() {
-            @Override
-            public void onResponse(Call<FavouriteResponse> call, Response<FavouriteResponse> response) {
-                if(response.isSuccessful()){
-                    holder.imagenNoFav.setImageResource(R.drawable.ic_favorite);
-                    isFav = !isFav;
-                    Toast.makeText(ctx, "Añadido a favoritos correctamente", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(ctx, "Error de petición", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FavouriteResponse> call, Throwable t) {
-                Log.e("NetworkFailure", t.getMessage());
-                Toast.makeText(ctx, "Error de conexión", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-    }
 
 
     @Override
