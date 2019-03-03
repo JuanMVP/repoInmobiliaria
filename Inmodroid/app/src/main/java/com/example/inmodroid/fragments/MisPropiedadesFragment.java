@@ -17,9 +17,11 @@ import com.example.inmodroid.adapters.MyMisPropiedadesRecyclerViewAdapter;
 import com.example.inmodroid.fragments.dummy.DummyContent;
 import com.example.inmodroid.fragments.dummy.DummyContent.DummyItem;
 import com.example.inmodroid.models.Property;
+import com.example.inmodroid.models.TipoAutenticacion;
 import com.example.inmodroid.responses.ResponseContainer;
 import com.example.inmodroid.retrofit.generator.ServiceGenerator;
 import com.example.inmodroid.retrofit.services.PropertiesService;
+import com.example.inmodroid.util.Util;
 
 import java.util.List;
 
@@ -76,7 +78,7 @@ public class MisPropiedadesFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            PropertiesService propertiesService = ServiceGenerator.createService(PropertiesService.class);
+            PropertiesService propertiesService = ServiceGenerator.createService(PropertiesService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
             Call<ResponseContainer<Property>> callUserProperties = propertiesService.getUserProperties();
 
             callUserProperties.enqueue(new Callback<ResponseContainer<Property>>() {

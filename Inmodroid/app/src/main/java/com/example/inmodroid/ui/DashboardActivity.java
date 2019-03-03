@@ -14,7 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.inmodroid.R;
 import com.example.inmodroid.fragments.InmueblesFavoritosFragment;
 import com.example.inmodroid.fragments.InmueblesFragment;
@@ -43,15 +47,26 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //cabecera usuario
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        ImageView imagenUsuario = headerView.findViewById(R.id.picture);
+        TextView nombreUsuario = headerView.findViewById(R.id.userName);
+        TextView email = headerView.findViewById(R.id.emailUser);
+
+        Glide.with(this).load(Util.getPhotoUser(DashboardActivity.this)).apply(RequestOptions.circleCropTransform()).into(imagenUsuario);
+        nombreUsuario.setText(Util.getNombreUser(DashboardActivity.this).toUpperCase());
+        email.setText(Util.getEmailUser(DashboardActivity.this));
 
         //contenedor para fragments
         contenedor = findViewById(R.id.contenedor);
@@ -71,6 +86,9 @@ public class DashboardActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.contenedor, new InmueblesFragment()).commit();
+
+
+
     }
 
     @Override
@@ -114,6 +132,10 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.goLogin) {
             startActivity(new Intent(DashboardActivity.this,LoginActivity.class));
             
+        } else if(id == R.id.goPropertiesList){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor,new InmueblesFragment()).commit();
+
         } else if (id == R.id.goFavourites) {
 
             getSupportFragmentManager().beginTransaction()

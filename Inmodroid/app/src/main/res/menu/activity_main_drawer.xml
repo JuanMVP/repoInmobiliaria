@@ -8,6 +8,13 @@
             android:id="@+id/goLogin"
             android:icon="@drawable/ic_login"
             android:title="Iniciar Sesión" />
+
+
+        <item
+            android:id="@+id/goPropertiesList"
+            android:icon="@drawable/ic_apartment"
+            android:title="Lista de Inmuebles" />
+
         <item
             android:id="@+id/goFavourites"
             android:icon="@drawable/ic_rating"
