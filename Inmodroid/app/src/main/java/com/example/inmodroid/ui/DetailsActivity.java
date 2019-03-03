@@ -79,7 +79,12 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         adapterImagen = new PhotoAdapter(DetailsActivity.this,propiedad.getPhotos());
-        visorDeFotos.setAdapter(adapterImagen);
+        if(propiedad.getPhotos() != null){
+            visorDeFotos.setAdapter(adapterImagen);
+        }else{
+            visorDeFotos.setAdapter(new PhotoAdapter(DetailsActivity.this,"http://www.bellezaverde.es/wp-content/uploads/2017/08/wnetrze-w-szarosciach-nowoczesne-13.jpg"));
+        }
+
         titulo.setText(propiedad.getTitle());
         categoria.setText(propiedad.getCategoryId().getName());
         descripcion.setText(propiedad.getDescription());

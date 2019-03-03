@@ -1,5 +1,6 @@
 package com.example.inmodroid.ui;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,15 +25,15 @@ import com.example.inmodroid.util.Util;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PropertyAddActivity extends AppCompatActivity {
+public class PropertyAddActivity extends AppCompatActivity  {
     private String token;
-    private EditText addTitulo,addDireccion,addDescripcion,addCodigoPostal,addHabitacion,addPrecio;
-    private TextView region,provincia, ciudad;
+    private EditText addTitulo,addDireccion,addDescripcion,addCodigoPostal,addHabitacion,addPrecio,provincia, ciudad;
     private Button btnSeleccionarCiudad, btnAddPropiedad;
     private Spinner categorias;
     private List<Category> listaCategorias;
@@ -48,10 +49,10 @@ public class PropertyAddActivity extends AppCompatActivity {
         addCodigoPostal = findViewById(R.id.codigoPostalAddPropiedad);
         addHabitacion = findViewById(R.id.habitacionesAddPropiedad);
         addPrecio = findViewById(R.id.precioAddPropiedad);
-        region = findViewById(R.id.textRegiosAddPropiedad);
-        provincia = findViewById(R.id.textProvinciaAddPropiedad);
-        ciudad = findViewById(R.id.textCiudadAddPropiedad);
-        btnSeleccionarCiudad = findViewById(R.id.buttonProvinciaAddPropiedad);
+
+        provincia = findViewById(R.id.provinciaAddPropiedad);
+        ciudad = findViewById(R.id.ciudadAddPropiedad);
+
         btnAddPropiedad = findViewById(R.id.buttonAddPropiedad);
         categorias = findViewById(R.id.spinnerCategoriasAddPropiedad);
 
@@ -65,27 +66,24 @@ public class PropertyAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String direccionCompleta = "Calle " + addDireccion.getText().toString() + ", " + addCodigoPostal.getText().toString() + " " + " " + provincia.getText().toString() + ", España";
 
 
                 Category category = (Category) categorias.getSelectedItem();
 
-                AddPropertyDto crearPropiedadDto = new AddPropertyDto(addTitulo.getText().toString(),
+                AddPropertyDto nuevaPropiedad = new AddPropertyDto(
+                        addTitulo.getText().toString(),
                         addDescripcion.getText().toString(),
-                        addDescripcion.getText().toString(),
-                        addHabitacion.getText().toString(),
+                        Integer.valueOf(addPrecio.getText().toString()),
+                        Integer.valueOf(addHabitacion.getText().toString()),
                         category.getId(),
-                        addDescripcion.getText().toString(),
+                        addDireccion.getText().toString(),
                         addCodigoPostal.getText().toString(),
                         ciudad.getText().toString(),
-                        provincia.getText().toString());
-
-
-                Category categoriaSeleccionada = (Category) categorias.getSelectedItem();
-                crearPropiedadDto.setCategoryId(categoriaSeleccionada.getName());
+                        provincia.getText().toString(),
+                        "07, 07");
 
                 PropertiesService service = ServiceGenerator.createService(PropertiesService.class, Util.getToken(PropertyAddActivity.this), TipoAutenticacion.JWT);
-                Call<AddPropertyResponse> call = service.addProperty(crearPropiedadDto);
+                Call<AddPropertyResponse> call = service.addProperty(nuevaPropiedad);
 
                 call.enqueue(new Callback<AddPropertyResponse>() {
                     @Override
@@ -233,5 +231,6 @@ public class PropertyAddActivity extends AppCompatActivity {
 
 
         }
+
 
 }

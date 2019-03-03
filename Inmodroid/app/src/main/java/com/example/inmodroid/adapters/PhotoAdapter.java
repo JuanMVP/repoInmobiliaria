@@ -11,12 +11,14 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.inmodroid.R;
+import com.example.inmodroid.ui.DetailsActivity;
 
 import java.util.List;
 
 public class PhotoAdapter extends PagerAdapter {
     private Context cxt;
     private List<String> urls;
+    private String url;
     private ImageView[] photos;
     private LayoutInflater layoutInflater;
 
@@ -31,6 +33,11 @@ public class PhotoAdapter extends PagerAdapter {
         this.urls = urls;
         this.photos = photos;
         this.layoutInflater = layoutInflater;
+    }
+
+    public PhotoAdapter(Context cxt, String url) {
+        this.cxt = cxt;
+        this.url = url;
     }
 
     @Override

@@ -128,83 +128,6 @@
         app:layout_constraintTop_toBottomOf="@+id/habitacionesAddPropiedad" />
 
 
-    <TableLayout
-        android:id="@+id/tablaRegiones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasAddPropiedad">
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Region"
-                android:fontFamily="casual"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textRegiosAddPropiedad"
-                android:fontFamily="casual"
-
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Provincia"
-                android:fontFamily="casual"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textProvinciaAddPropiedad"
-                android:fontFamily="casual"
-
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Ciudad"
-                android:fontFamily="casual"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textCiudadAddPropiedad"
-                android:fontFamily="casual"
-               
-                android:textSize="18sp" />
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/buttonProvinciaAddPropiedad"
-        android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="casual"
-        android:text="Seleccionar Ciudad"
-        app:layout_constraintEnd_toStartOf="@+id/tablaRegiones"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasAddPropiedad" />
-
     <Button
         android:id="@+id/buttonAddPropiedad"
         android:layout_width="0dp"
@@ -219,8 +142,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonProvinciaAddPropiedad"
-        app:layout_constraintVertical_bias="0.641" />
+        app:layout_constraintTop_toBottomOf="@+id/provinciaAddPropiedad" />
+
+    <EditText
+        android:id="@+id/provinciaAddPropiedad"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:fontFamily="casual"
+        android:hint="Provincia"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/ciudadAddPropiedad"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasAddPropiedad" />
+
+    <EditText
+        android:id="@+id/ciudadAddPropiedad"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:fontFamily="casual"
+        android:hint="Ciudad"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasAddPropiedad" />
 
 
 </android.support.constraint.ConstraintLayout>

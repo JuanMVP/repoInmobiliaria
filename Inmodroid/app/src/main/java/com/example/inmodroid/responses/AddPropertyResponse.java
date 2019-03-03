@@ -1,12 +1,14 @@
 package com.example.inmodroid.responses;
 
+import com.example.inmodroid.models.OwnerId;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddPropertyResponse {
 
     private String id;
-    private String ownerId;
+    private OwnerId ownerId;
     private String title;
     private String description;
     private Long price;
@@ -22,7 +24,7 @@ public class AddPropertyResponse {
 
     public AddPropertyResponse(){}
 
-    public AddPropertyResponse(String id, String ownerId, String title, String description, Long price, Long rooms, Long size, String categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
+    public AddPropertyResponse(String id, OwnerId ownerId, String title, String description, Long price, Long rooms, Long size, String categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
         this.id = id;
         this.ownerId = ownerId;
         this.title = title;
@@ -56,11 +58,11 @@ public class AddPropertyResponse {
         this.id = id;
     }
 
-    public String getOwnerId() {
+    public OwnerId getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(OwnerId ownerId) {
         this.ownerId = ownerId;
     }
 
