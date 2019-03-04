@@ -1,6 +1,7 @@
 package com.example.inmodroid.retrofit.services;
 
 import com.example.inmodroid.models.AddPropertyDto;
+import com.example.inmodroid.models.EditPropertyDto;
 import com.example.inmodroid.responses.AddPropertyResponse;
 import com.example.inmodroid.responses.FavouriteResponse;
 import com.example.inmodroid.responses.OneResponseContainer;
@@ -13,6 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -41,6 +43,14 @@ public interface PropertiesService {
 
     @POST("/properties")
     Call<AddPropertyResponse> addProperty (@Body AddPropertyDto property);
+
+    @PUT("/properties/{id}")
+    Call<EditPropertyDto> editProperty(@Path("id")String id, @Body EditPropertyDto editProperty);
+
+    @DELETE("/properties/{id}")
+    Call<ResponseContainer<Property>> delete(@Path("id") String id);
+
+
 
 
 }

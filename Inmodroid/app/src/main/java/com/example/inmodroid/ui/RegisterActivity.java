@@ -118,26 +118,20 @@ public class RegisterActivity extends AppCompatActivity {
                 AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
 
                 Call<AuthAndRegisterResponse> loginReponseCall = service.register(registro);
-                //.doRegister("lNeTI8waAqmpUZa7QSiLv53rqSnlsldv",
-                //        registro);
+
 
                 loginReponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
                     @Override
                     public void onResponse(Call<AuthAndRegisterResponse> call, Response<AuthAndRegisterResponse> response) {
-                        if (response.code() == 201) {
-                            // éxito
-                            /*
-                                Pasos:
-                                    1) Almacenar el token donde corresponda.
-                                    2) Lanzar el siguiente Activity.
-                             */
-                            //ServiceGenerator.jwtToken = response.body().getToken();
+                        if (response.isSuccessful()) {
+
                             UtilToken.setToken(RegisterActivity.this, response.body().getToken());
-                            startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));                            // Toast.makeText(RegistroActivity.this, "Usuario registrado y logeado con éxito", Toast.LENGTH_LONG).show();
-                            // Log.d("token", response.body().getToken());
+                            startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
+                             Toast.makeText(RegisterActivity.this, "Usuario registrado y logeado con éxito", Toast.LENGTH_LONG).show();
+
 
                         } else {
-                            // error
+
                             Toast.makeText(RegisterActivity.this, "Error en el registro. Revise los datos introducidos", Toast.LENGTH_LONG).show();
                         }
                     }

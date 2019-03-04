@@ -22,6 +22,7 @@ import com.example.inmodroid.responses.ResponseContainer;
 import com.example.inmodroid.retrofit.generator.ServiceGenerator;
 import com.example.inmodroid.retrofit.services.PropertiesService;
 import com.example.inmodroid.util.Util;
+import com.example.inmodroid.util.UtilToken;
 
 import java.util.List;
 

@@ -1,13 +1,18 @@
 package com.example.inmodroid.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class AddPropertyDto {
+public class EditPropertyDto implements Serializable {
+
     private String id;
+    private OwnerId ownerId;
     private String title;
     private String description;
-    private double price;
-    private int rooms;
+    private Long price;
+    private Long rooms;
+    private Long size;
     private String categoryId;
     private String address;
     private String zipcode;
@@ -17,17 +22,17 @@ public class AddPropertyDto {
     private List<String> photos;
 
 
+    public EditPropertyDto(){}
 
 
-    public AddPropertyDto() {
-
-    }
-
-    public AddPropertyDto(String title, String description, double price, int rooms, String categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
+    public EditPropertyDto(String id, OwnerId ownerId, String title, String description, Long price, Long rooms, Long size, String categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
+        this.id = id;
+        this.ownerId = ownerId;
         this.title = title;
         this.description = description;
         this.price = price;
         this.rooms = rooms;
+        this.size = size;
         this.categoryId = categoryId;
         this.address = address;
         this.zipcode = zipcode;
@@ -37,47 +42,6 @@ public class AddPropertyDto {
         this.photos = photos;
     }
 
-    public AddPropertyDto(String id, String title, String description, double price, int rooms, String categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.rooms = rooms;
-        this.categoryId = categoryId;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.province = province;
-        this.loc = loc;
-        this.photos = photos;
-    }
-
-    public AddPropertyDto(String title, String description, double price, int rooms, String categoryId, String address, String zipcode, String city, String province, String loc) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.rooms = rooms;
-        this.categoryId = categoryId;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.province = province;
-        this.loc = loc;
-    }
-
-    public AddPropertyDto(String id, String title, String description, double price, int rooms, String categoryId, String address, String zipcode, String city, String province, String loc) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.rooms = rooms;
-        this.categoryId = categoryId;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.province = province;
-        this.loc = loc;
-    }
 
     public String getId() {
         return id;
@@ -85,6 +49,14 @@ public class AddPropertyDto {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public OwnerId getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(OwnerId ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getTitle() {
@@ -103,20 +75,28 @@ public class AddPropertyDto {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
-    public int getRooms() {
+    public Long getRooms() {
         return rooms;
     }
 
-    public void setRooms(int rooms) {
+    public void setRooms(Long rooms) {
         this.rooms = rooms;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     public String getCategoryId() {
@@ -175,15 +155,16 @@ public class AddPropertyDto {
         this.photos = photos;
     }
 
-
     @Override
     public String toString() {
-        return "AddPropertyDto{" +
+        return "EditPropertyDto{" +
                 "id='" + id + '\'' +
+                ", ownerId='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", rooms=" + rooms +
+                ", size=" + size +
                 ", categoryId='" + categoryId + '\'' +
                 ", address='" + address + '\'' +
                 ", zipcode='" + zipcode + '\'' +

@@ -13,12 +13,12 @@ public class PropertyFav {
     private String city;
     private String province;
     private String loc;
-    private String ownerId;
+    private OwnerId ownerId;
     private String id;
     private List<String> photos;
 
 
-    public PropertyFav(String title, String description, String price, String rooms, String address, String zipcode, String city, String province, String loc, String ownerId, String id, List<String> photos) {
+    public PropertyFav(String title, String description, String price, String rooms, String address, String zipcode, String city, String province, String loc, OwnerId ownerId, String id, List<String> photos) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -106,11 +106,11 @@ public class PropertyFav {
         this.loc = loc;
     }
 
-    public String getOwnerId() {
+    public OwnerId getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(OwnerId ownerId) {
         this.ownerId = ownerId;
     }
 

@@ -5,14 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class OwnerId {
 
-    @SerializedName("_id")
-    @Expose
+
     private String id;
-    @SerializedName("picture")
-    @Expose
+
     private String picture;
-    @SerializedName("name")
-    @Expose
+
     private String name;
 
     /**

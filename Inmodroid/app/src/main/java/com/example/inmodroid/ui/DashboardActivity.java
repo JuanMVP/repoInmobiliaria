@@ -64,9 +64,14 @@ public class DashboardActivity extends AppCompatActivity
         TextView nombreUsuario = headerView.findViewById(R.id.userName);
         TextView email = headerView.findViewById(R.id.emailUser);
 
-        Glide.with(this).load(Util.getPhotoUser(DashboardActivity.this)).apply(RequestOptions.circleCropTransform()).into(imagenUsuario);
-        nombreUsuario.setText(Util.getNombreUser(DashboardActivity.this).toUpperCase());
-        email.setText(Util.getEmailUser(DashboardActivity.this));
+        if(Util.getEmailUser(DashboardActivity.this) != null){
+
+            Glide.with(this).load(Util.getPhotoUser(DashboardActivity.this)).apply(RequestOptions.circleCropTransform()).into(imagenUsuario);
+            nombreUsuario.setText(Util.getNombreUser(DashboardActivity.this).toUpperCase());
+            email.setText(Util.getEmailUser(DashboardActivity.this));
+
+        }
+
 
         //contenedor para fragments
         contenedor = findViewById(R.id.contenedor);

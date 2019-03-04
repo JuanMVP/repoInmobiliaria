@@ -7,7 +7,7 @@
     tools:context=".ui.PropertyAddActivity">
 
     <EditText
-        android:id="@+id/tituloAddPropiedad"
+        android:id="@+id/tituloEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,10 +21,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloPantallaAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloPantallaEditPropiedad" />
 
     <EditText
-        android:id="@+id/descripcionAddPropiedad"
+        android:id="@+id/descripcionEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -38,10 +38,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/direccionAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/direccionEditPropiedad" />
 
     <TextView
-        android:id="@+id/tituloPantallaAddPropiedad"
+        android:id="@+id/tituloPantallaEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="31dp"
         android:layout_marginStart="8dp"
@@ -49,7 +49,7 @@
         android:layout_marginEnd="8dp"
 
         android:fontFamily="casual"
-        android:text="Añadir Nueva Propiedad"
+        android:text="Editar Propiedad"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="20sp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/direccionAddPropiedad"
+        android:id="@+id/direccionEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -72,10 +72,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloEditPropiedad" />
 
     <EditText
-        android:id="@+id/codigoPostalAddPropiedad"
+        android:id="@+id/codigoPostalEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -88,10 +88,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descripcionAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/descripcionEditPropiedad" />
 
     <EditText
-        android:id="@+id/habitacionesAddPropiedad"
+        android:id="@+id/habitacionesEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -102,13 +102,13 @@
         android:hint="Habitaciones"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/precioAddPropiedad"
+        app:layout_constraintEnd_toStartOf="@+id/precioEditPropiedad"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codigoPostalAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/codigoPostalEditPropiedad" />
 
     <EditText
-        android:id="@+id/precioAddPropiedad"
+        android:id="@+id/precioEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -119,10 +119,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codigoPostalAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/codigoPostalEditPropiedad" />
 
     <Spinner
-        android:id="@+id/spinnerCategoriasAddPropiedad"
+        android:id="@+id/spinnerCategoriasEditPropiedad"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -132,11 +132,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/habitacionesAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/habitacionesEditPropiedad" />
 
 
     <Button
-        android:id="@+id/buttonAddPropiedad"
+        android:id="@+id/buttonEditPropiedad"
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
@@ -144,15 +144,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="casual"
-        android:text="Añadir Propiedad"
+        android:text="Editar Propiedad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddPhoto" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonEditPhoto" />
 
     <EditText
-        android:id="@+id/provinciaAddPropiedad"
+        android:id="@+id/provinciaEditPropiedad"
         android:layout_width="146dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -163,13 +163,13 @@
         android:hint="Provincia"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/ciudadAddPropiedad"
+        app:layout_constraintEnd_toStartOf="@+id/ciudadEditPropiedad"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasEditPropiedad" />
 
     <EditText
-        android:id="@+id/ciudadAddPropiedad"
+        android:id="@+id/ciudadEditPropiedad"
         android:layout_width="197dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
@@ -180,10 +180,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriasEditPropiedad" />
 
     <Button
-        android:id="@+id/buttonAddPhoto"
+        android:id="@+id/buttonEditPhoto"
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
@@ -194,7 +194,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/provinciaAddPropiedad" />
+        app:layout_constraintTop_toBottomOf="@+id/provinciaEditPropiedad" />
 
 
 </android.support.constraint.ConstraintLayout>
